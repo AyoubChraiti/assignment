@@ -1,0 +1,57 @@
+@import "tailwindcss";
+:root { color: #202126; background: #fff; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 16px; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+a { color: #002fa7; text-decoration: none; }
+a:hover { text-decoration: underline; }
+button, input, select { font: inherit; }
+button, select { cursor: pointer; }
+button, input, select { border: 1px solid #bfc1c8; border-radius: 4px; background: white; padding: .6rem .85rem; }
+button:hover { background: #f7f7f8; }
+button:disabled { opacity: .55; cursor: not-allowed; }
+:focus-visible { outline: 2px solid #002fa7; outline-offset: 3px; }
+.site-header { padding: 1.25rem max(5vw, 1.25rem); border-bottom: 1px solid #dfe0e5; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+.brand { color: #202126; font-weight: 700; }
+.site-header nav { display: flex; gap: 1.75rem; }
+main { max-width: 1280px; margin: 0 auto; padding: 3rem 2rem; }
+h1 { font-size: 2.5rem; font-weight: 600; letter-spacing: -.04em; line-height: 1.15; margin: 0 0 .6rem; }
+h2 { font-size: 1.5rem; font-weight: 600; margin: 0 0 1.5rem; }
+p { color: #62646d; margin: 0; }
+.page-heading { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 2.5rem; }
+.primary { background: #002fa7; border-color: #002fa7; color: white; }
+.primary:hover { background: #002783; }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 2px solid #002fa7; border-bottom: 1px solid #dfe0e5; margin-bottom: 2rem; }
+.stats > div { padding: 1.5rem; border-right: 1px solid #dfe0e5; }
+.stats > div:first-child { padding-left: 0; }
+.stats > div:last-child { border: 0; }
+dt { font-size: .875rem; color: #62646d; margin-bottom: .5rem; }
+dd { font-size: clamp(1.25rem, 2.3vw, 2rem); font-weight: 500; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+small { font-size: .875rem; font-weight: 400; }
+label { display: flex; flex-direction: column; gap: .4rem; font-size: .875rem; }
+.filters { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: end; }
+.search { width: min(100%, 360px); }
+.table-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; white-space: nowrap; font-size: .875rem; }
+th { text-align: left; font-weight: 500; background: #f7f7f8; color: #62646d; }
+th, td { padding: 1rem; border-bottom: 1px solid #dfe0e5; }
+.name { font-weight: 500; }
+.numeric { text-align: right; font-variant-numeric: tabular-nums; }
+.role { padding: .25rem .5rem; border-radius: 3px; background: #f7f7f8; }
+.role.admin { color: #002fa7; border: 1px solid #dfe0e5; }
+.row-actions { display: flex; align-items: center; gap: 1rem; }
+.text-button { padding: 0; border: 0; color: #002fa7; background: transparent; }
+.danger, .error { color: #ac2130; }
+.empty { text-align: center; padding: 3rem; color: #62646d; }
+.pagination { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; font-size: .875rem; color: #62646d; }
+.pagination label { flex-direction: row; align-items: center; gap: .75rem; }
+.page-links { display: flex; align-items: center; gap: .4rem; }
+.page-links a { display: inline-block; padding: .5rem .75rem; border-radius: 3px; }
+.page-links a[aria-current] { background: #002fa7; color: white; }
+.gap { padding: 0 .3rem; }
+.modal-backdrop { position: fixed; inset: 0; z-index: 10; background: #0006; display: grid; place-items: center; padding: 1rem; white-space: normal; }
+.modal { width: min(100%, 440px); max-height: 90vh; overflow-y: auto; background: white; padding: 2rem; border-radius: 6px; }
+.modal form { display: grid; gap: 1rem; }
+.form-actions { display: flex; justify-content: flex-end; gap: .75rem; margin-top: .5rem; }
+.feedback { display: block; font-size: .875rem; color: #002fa7; margin-top: .5rem; }
+.error { font-size: .875rem; }
+@media (max-width: 700px) { main { padding: 2rem 1rem; } h1 { font-size: 2rem; } .stats { grid-template-columns: repeat(2, 1fr); } .stats > div { padding: 1rem; } .stats > div:first-child { padding-left: 1rem; } .stats > div:nth-child(2) { border-right: 0; } .stats > div:nth-child(-n+2) { border-bottom: 1px solid #dfe0e5; } .filters { align-items: stretch; } .pagination { justify-content: center; } }
