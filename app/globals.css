@@ -48,8 +48,8 @@ th, td { padding: 1rem; border-bottom: 1px solid #dfe0e5; }
 .page-links a { display: inline-block; padding: .5rem .75rem; border-radius: 3px; }
 .page-links a[aria-current] { background: #002fa7; color: white; }
 .gap { padding: 0 .3rem; }
-.modal-backdrop { position: fixed; inset: 0; z-index: 10; background: #0006; display: grid; place-items: center; padding: 1rem; white-space: normal; }
-.modal { width: min(100%, 440px); max-height: 90vh; overflow-y: auto; background: white; padding: 2rem; border-radius: 6px; }
+.modal::backdrop { background: #0006; }
+.modal { margin: auto; width: min(calc(100% - 2rem), 440px); max-height: 90vh; overflow-y: auto; background: white; padding: 2rem; border: 0; border-radius: 6px; white-space: normal; }
 .modal form { display: grid; gap: 1rem; }
 .form-actions { display: flex; justify-content: flex-end; gap: .75rem; margin-top: .5rem; }
 .feedback { display: block; font-size: .875rem; color: #002fa7; margin-top: .5rem; }

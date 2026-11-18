@@ -1,11 +1,13 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { userSchema, type UserInput } from '@/lib/validation';
 const empty: UserInput = { name: '', email: '', role: 'member', salary: '', startDate: '' };
 export function UserForm({ user }: { user?: UserInput & { id: string } }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const dialog = useRef<HTMLDialogElement>(null);
+  useEffect(() => { if (open) dialog.current?.showModal(); }, [open]);
   const [values, setValues] = useState<UserInput>(user ? { name: user.name, email: user.email, role: user.role, salary: user.salary, startDate: user.startDate } : empty);
   const [touched, setTouched] = useState<string[]>([]);
   const [saving, setSaving] = useState(false);
@@ -27,7 +29,7 @@ export function UserForm({ user }: { user?: UserInput & { id: string } }) {
   return <div className="form-control">
     <button className={user ? 'text-button' : 'primary'} onClick={() => { setOpen(true); setMessage(''); }}>{user ? 'Edit' : 'Add user'}</button>
     {!open && message && <span role="status" className="feedback">{message}</span>}
-    {open && <div className="modal-backdrop"><section role="dialog" aria-modal="true" aria-labelledby={`form-${user?.id ?? 'new'}`} className="modal">
+    {open && <dialog ref={dialog} onCancel={() => setOpen(false)} aria-labelledby={`form-${user?.id ?? 'new'}`} className="modal">
       <h2 id={`form-${user?.id ?? 'new'}`}>{user ? 'Edit user' : 'Add user'}</h2>
       <form onSubmit={submit}>
         {(['name', 'email', 'role', 'salary', 'startDate'] as const).map(key => <label key={key}>
@@ -38,7 +40,7 @@ export function UserForm({ user }: { user?: UserInput & { id: string } }) {
         {message && <p role="alert" className="error">{message}</p>}
         <div className="form-actions"><button type="button" disabled={saving} onClick={() => setOpen(false)}>Cancel</button><button className="primary" disabled={saving || !validation.success}>{saving ? 'Saving…' : 'Save user'}</button></div>
       </form>
-    </section></div>}
+    </dialog>}
   </div>;
 }
 export function DeleteUser({ id, name }: { id: string; name: string }) {

@@ -20,6 +20,6 @@ export default async function UsersPage({ searchParams }: { searchParams: Promis
       {result.items.map(user => <tr key={user.id}><td className="name">{user.name}</td><td>{user.email}</td><td><span className={`role ${user.role}`}>{user.role}</span></td><td className="numeric">{user.salary.toFixed(2)}</td><td>{user.startDate.toISOString().slice(0, 10)}</td><td><div className="row-actions"><UserForm user={{ ...user, salary: user.salary.toFixed(2), startDate: user.startDate.toISOString().slice(0, 10) }} /><DeleteUser id={user.id} name={user.name} /></div></td></tr>)}
       {!result.items.length && <tr><td colSpan={6} className="empty">No users found.</td></tr>}
     </tbody></table></div>
-    <Pagination {...result} />
+    <Pagination page={result.page} size={result.size} total={result.total} totalPages={result.totalPages} />
   </>;
 }
