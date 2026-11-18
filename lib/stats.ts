@@ -1,10 +1,6 @@
 import Decimal from 'decimal.js';
 
-export type StatsInput = { count: number; totalSalary: string; totalSeniorityMonths: string };
-export function completedMonths(start: Date, today: Date): number {
-  const months = (today.getUTCFullYear() - start.getUTCFullYear()) * 12 + today.getUTCMonth() - start.getUTCMonth();
-  return Math.max(0, months - (today.getUTCDate() < start.getUTCDate() ? 1 : 0));
-}
+type StatsInput = { count: number; totalSalary: string; totalSeniorityMonths: string };
 // Inputs are database aggregates, so this never needs every user in memory.
 export function calculateStats({ count, totalSalary, totalSeniorityMonths }: StatsInput) {
   const total = new Decimal(totalSalary);

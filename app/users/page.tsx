@@ -15,7 +15,7 @@ export default async function UsersPage({ searchParams }: { searchParams: Promis
       <div><dt>Average salary</dt><dd>{stats.averageSalary}</dd></div>
       <div><dt>Average seniority</dt><dd>{stats.averageSeniority.years}<small> years </small>{stats.averageSeniority.months}<small> months</small></dd></div>
     </dl>
-    <Filters roles />
+    <Filters />
     <div className="table-scroll"><table><thead><tr><th>Name</th><th>Email</th><th>Role</th><th className="numeric">Salary</th><th>Start date</th><th>Actions</th></tr></thead><tbody>
       {result.items.map(user => <tr key={user.id}><td className="name">{user.name}</td><td>{user.email}</td><td><span className={`role ${user.role}`}>{user.role}</span></td><td className="numeric">{user.salary.toFixed(2)}</td><td>{user.startDate.toISOString().slice(0, 10)}</td><td><div className="row-actions"><UserForm user={{ ...user, salary: user.salary.toFixed(2), startDate: user.startDate.toISOString().slice(0, 10) }} /><DeleteUser id={user.id} name={user.name} /></div></td></tr>)}
       {!result.items.length && <tr><td colSpan={6} className="empty">No users found.</td></tr>}

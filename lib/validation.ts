@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { pageSchema, sizeSchema } from './pagination';
 
 export const userSchema = z.object({
   name: z.string().trim().min(1, 'Name is required.').max(100),
@@ -10,15 +11,13 @@ export const userSchema = z.object({
 }).strict();
 export const updateUserSchema = userSchema.partial().refine(value => Object.keys(value).length > 0, 'Provide at least one field.');
 export const idSchema = z.uuid('Invalid user id.');
-const page = z.coerce.number().int().min(1).max(Number.MAX_SAFE_INTEGER).catch(1);
-const size = z.coerce.number().pipe(z.union([z.literal(10), z.literal(20), z.literal(50)])).catch(10);
 export const listSchema = z.object({
-  page: page.default(1), size: size.default(10),
+  page: pageSchema.default(1), size: sizeSchema.default(10),
   role: z.enum(['admin', 'member']).optional(),
   q: z.string().trim().max(100).default(''),
 }).strict();
 export type UserInput = z.infer<typeof userSchema>;
-export type ListInput = z.infer<typeof listSchema>;
+type ListInput = z.infer<typeof listSchema>;
 export type Query = Record<string, string | string[] | undefined>;
 // Pages recover from malformed URLs; API filters still return a validation error.
 export function pageQuery(query: Query): ListInput {

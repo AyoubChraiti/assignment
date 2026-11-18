@@ -40,7 +40,7 @@ Stop with `docker compose down`. Data survives in a Docker volume. Seeds use ups
 ### Decisions
 
 - Salary enters the API as a string, is stored as PostgreSQL `DECIMAL(14,2)`, and leaves JSON as a string. No money arithmetic uses JavaScript floating-point numbers. No currency was specified, so the UI does not invent one.
-- Seniority means completed calendar months as of today's UTC date. Average months are rounded down, then split into years and months. For example, 25 months becomes 2 years and 1 month. SQL calculates the aggregate; the pure `completedMonths()` function defines the same rule for unit tests.
+- Seniority means completed calendar months as of today's UTC date. Average months are rounded down, then split into years and months. For example, 25 months becomes 2 years and 1 month. SQL calculates completed months; `calculateStats()` converts their average into years and months.
 - Invalid page/size values fall back to page 1 / size 10; pages beyond the end use the last page. A malformed page URL recovers safely; invalid API filters produce 400.
 - Name search is case-insensitive and treats `%`, `_` and backslashes literally. Search and role filters also apply to statistics.
 - Count, rows and statistics use one repeatable-read transaction so the users page is internally consistent.

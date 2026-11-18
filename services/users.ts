@@ -16,7 +16,7 @@ export async function listUsers(input: unknown) {
       findMany: args => tx.user.findMany({ where, ...args, orderBy: [{ createdAt: 'desc' }, { id: 'asc' }] }),
     }, query.page, query.size);
     // Parameterized SQL aggregates salary and completed UTC months in PostgreSQL.
-    // STRPOS uses literal substring matching, like the escaped Prisma contains below.
+    // STRPOS uses literal substring matching, like the escaped Prisma contains above.
     const [aggregate] = await tx.$queryRaw<{ totalSalary: Prisma.Decimal; totalMonths: Prisma.Decimal }[]>(Prisma.sql`
       SELECT COALESCE(SUM(salary), 0) AS "totalSalary",
         COALESCE(SUM(GREATEST(0,

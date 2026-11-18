@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-export function Filters({ roles = false }: { roles?: boolean }) {
+export function Filters() {
   const search = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
@@ -22,6 +22,6 @@ export function Filters({ roles = false }: { roles?: boolean }) {
       const value = e.target.value; setQuery(value); clearTimeout(timer.current);
       timer.current = setTimeout(() => update(value), 300);
     }} /></label>
-    {roles && <label>Role<select value={search.get('role') === 'admin' ? 'admin' : search.get('role') === 'member' ? 'member' : ''} onChange={e => { clearTimeout(timer.current); update(query, e.target.value); }}><option value="">All roles</option><option value="admin">Admin</option><option value="member">Member</option></select></label>}
+    <label>Role<select value={search.get('role') === 'admin' ? 'admin' : search.get('role') === 'member' ? 'member' : ''} onChange={e => { clearTimeout(timer.current); update(query, e.target.value); }}><option value="">All roles</option><option value="admin">Admin</option><option value="member">Member</option></select></label>
   </div>;
 }
